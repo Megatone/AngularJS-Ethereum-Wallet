@@ -1,0 +1,95 @@
+<html>
+
+<head>
+    <title>Ethereum Wallet</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+
+<body ng-app="app">
+    <ng-view onload="" $autoscroll=""></ng-view>   
+    <div class="centerer" id="screen-select">
+        <div class="centered">
+            <table>
+                <tr>
+                    <th>Private Key:</th>
+                    <td><input type="text" placeholder="(private key)" id="select-privatekey" /></td>
+                </tr>
+                <tr>
+                    <td> </td>
+                    <td>
+                        <div id="select-submit-privatekey" class="submit disable">Unlock JSON Wallet</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="centerer hidden" id="screen-wallet">
+        <div class="centered">
+            <h1>Ethereum Wallet<span id="wallet-username" class="username right"></span></h1>
+            <hr />
+            <h3>Wallet Details:</h3>
+            <table>
+                <tr>
+                    <th>Address:</th>
+                    <td>
+                        <input type="text" readonly="readonly" class="readonly" id="wallet-address" value="" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Balance:</th>
+                    <td>
+                        <input type="text" readonly="readonly" class="readonly" id="wallet-balance" value="0.0" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>Nonce:</th>
+                    <td>
+                        <input type="text" readonly="readonly" class="readonly" id="wallet-transaction-count" value="0" />
+                    </td>
+                </tr>
+                <tr>
+                    <td> </td>
+                    <td>
+                        <div id="wallet-submit-refresh" class="submit">Refresh</div>
+                    </td>
+                </tr>
+            </table>
+            <h3>Send Ether:</h3>
+            <table>
+                <tr>
+                    <th>Target Address:</th>
+                    <td><input type="text" placeholder="(target address)" id="wallet-send-target-address" /></td>
+                </tr>
+                <tr>
+                    <th>Amount:</th>
+                    <td><input type="text" placeholder="(amount)" id="wallet-send-amount" /></td>
+                </tr>
+                <tr>
+                    <td> </td>
+                    <td>
+                        <div id="wallet-submit-send" class="submit disable">Send Ether</div>
+                    </td>
+                </tr>
+            </table>
+            <h3>Session Activity</h3>
+            <div id="wallet-activity" class="activity"></div>
+
+            <hr />
+          
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.min.js"></script>
+    <script src="/js/librerias/ethers.js"></script>
+    <script src="/js/logica.js"></script>
+
+
+    <script src="/js/app.js"></script>
+    <script src="/js/controllers/keyController.js"></script>
+    <script src="/js/controllers/walletController.js"></script>
+
+</body>
+
+</html>
