@@ -1,0 +1,56 @@
+<div class="centerer" id="screen-wallet">
+        <div class="centered">
+            <h1>Ethereum Wallet<span id="wallet-username" class="username right"></span></h1>
+            <hr />
+            <h3>Wallet Details:</h3>
+            <table>
+                <tr>
+                    <th>Address:</th>
+                    <td>
+                        <input type="text" readonly="readonly" class="readonly" id="wallet-address" ng-value="activeWallet.address" onclick ="this.select()" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Balance:</th>
+                    <td>
+                        <input type="text" readonly="readonly" class="readonly" id="wallet-balance" value="0.0" ng-value="Balance" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>Nonce:</th>
+                    <td>
+                        <input type="text" readonly="readonly" class="readonly" id="wallet-transaction-count" value="0" ng-value="TransactionCount" />
+                    </td>
+                </tr>
+                <tr>
+                    <td> </td>
+                    <td>
+                        <div id="wallet-submit-refresh" class="submit" ng-click="refresh()">Refresh</div>
+                    </td>
+                </tr>
+            </table>
+            <h3>Send Ether: {{gasPrice | number : 0}} Gas Price</h3>
+            <table>
+                <tr>
+                    <th>Target Address:</th>
+                    <td><input type="text" placeholder="(target address)" id="wallet-send-target-address" ng-model="TargetAddress"/></td>
+                </tr>
+                <tr>
+                    <th>Amount:</th>
+                    <td><input type="text" placeholder="(amount)" id="wallet-send-amount" ng-value="Amount" /></td>
+                </tr>
+                <tr>
+                    <td> </td>
+                    <td>
+                        <div id="wallet-submit-send" class="submit" ng-click="SendEther()">Send Ether</div>
+                    </td>
+                </tr>
+            </table>
+            <h3>Session Activity</h3>
+            <div id="wallet-activity" class="activity"></div>
+
+            <hr />
+          
+        </div>
+    </div>

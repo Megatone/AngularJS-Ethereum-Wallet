@@ -4,8 +4,6 @@ function setEnter(source, target) {
     }
 }
 
-
-
 (function() {
     var inputPrivatekey = document.getElementById('select-privatekey');
     var submit = document.getElementById('select-submit-privatekey');
@@ -98,7 +96,8 @@ var addActivity = (function() {
 
         // Matt (from Etherscan) is working on a gasPrice API call, which
         // should be done within a week or so.
-        // @TODO
+        // @TODO https://api.etherscan.io/api?module=proxy&action=eth_gasPrice
+
         var gasPrice =  0x4e3b29200;
         console.log('GasPrice: ' + gasPrice);
 
@@ -122,7 +121,6 @@ var addActivity = (function() {
         });
     }
 })();
-
 
 
 

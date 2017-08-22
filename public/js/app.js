@@ -9,7 +9,7 @@ var app = angular.module("app", ['ngRoute'])
         $rootScope.$on("$locationChangeStart", function (event, next, current) {
             for (var i in window.routes) {
                 if (next.indexOf(i) != -1) {
-                    if (window.routes[i].requireLogin) {
+                    if (window.routes[i].requireLogin &&  $rootScope.activeWallet == null) {
                         $location.path("/key");
                         event.preventDefault();
                     }
