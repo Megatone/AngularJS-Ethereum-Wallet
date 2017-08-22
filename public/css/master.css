@@ -1,0 +1,33 @@
+body {
+    background-image: url(../img/eth-background-1.jpg) ;    
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.back1{
+    background-image: url(../img/eth-background-1.jpg) !important;
+}
+.back2{
+    background-image: url(../img/eth-background-2.jpg) !important;
+}
+.back3{
+    background-image: url(../img/eth-background-3.jpg) !important;
+}
+.back4{
+    background-image: url(../img/eth-background-4.jpg) !important;
+}
+.back5{
+    background-image: url(../img/eth-background-5.jpg) !important;
+}
+
+
+
+
+body > section#main {
+    display: block;
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+}

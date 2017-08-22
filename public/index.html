@@ -1,21 +1,41 @@
 <html>
 
 <head>
+
     <title>Ethereum Wallet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/particles.css">
+    <link rel="stylesheet" type="text/css" href="/css/master.css">
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
 </head>
 
-<body ng-app="app">
-    <ng-view onload="" $autoscroll=""></ng-view>
+<body ng-app="app" ng-controller="backgroundController" class="{{bodyBackgroundClass()}}">
+
+    <section id="main" class="p-relative" role="main">
+        <section id="content" class="container">
+            <ng-view onload="" $autoscroll=""></ng-view>
+        </section>
+    </section>
+
+    <div id="particles-js"></div>
+
+    <script src="/js/librerias/particles.min.js"></script>
+    <script src="/js/librerias/particles.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.min.js"></script>
     <script src="/js/librerias/ethers.js"></script>
-   <!-- <script src="/js/logica.js"></script>-->
-
+    <script src="/js/librerias/bootstrap-notify.js"></script>
 
     <script src="/js/app.js"></script>
+    <script src="/js/directives/directives.js"></script>
     <script src="/js/controllers/keyController.js"></script>
     <script src="/js/controllers/walletController.js"></script>
+
+    <script src="/js/controllers/backgroundController.js"></script>
+
 
 </body>
 

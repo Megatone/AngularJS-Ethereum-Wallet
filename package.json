@@ -1,14 +1,14 @@
 {
-  "name": "ethereum-wallet",
+  "name": "angularjs-ethereum-wallet",
   "version": "1.0.0",
   "description": "Monedero Ethereum",
   "main": "server/server.js",
   "scripts": {
-    "start" : "nodemon server/server.js"
+    "start": "nodemon server/server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Megatone/ethereum-wallet.git"
+    "url": "git+https://github.com/Megatone/AngularJS-Ethereum-Wallet.git"
   },
   "keywords": [
     "ethereum"
@@ -16,11 +16,12 @@
   "author": "Megatone",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Megatone/ethereum-wallet/issues"
+    "url": "https://github.com/Megatone/AngularJS-Ethereum-Wallet/issues"
   },
-  "homepage": "https://github.com/Megatone/ethereum-wallet#readme",
+  "homepage": "https://github.com/Megatone/AngularJS-Ethereum-Wallet#readme",
   "dependencies": {
     "express": "^4.15.4",
     "nodemon": "^1.11.0"
-  }
+  },
+  "devDependencies": {}
 }

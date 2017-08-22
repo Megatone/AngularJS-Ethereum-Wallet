@@ -30,3 +30,26 @@ window.routes = {
         requireLogin: true
     }
 };
+
+
+app.factory('Notify', function () {
+    return {
+        notify: function (notification) {
+            $.notify({
+                title: notification.title,
+                message: notification.message
+            }, {
+                    type: notification.type,
+                    placement: {
+                        from: "bottom",
+                        align: "right"
+                    },
+                    showProgressbar: true,
+                    allow_dismiss: true,
+                    delay: 5000,
+                    offset: 1,
+                    timer: 100
+                });
+        }
+    };
+});
