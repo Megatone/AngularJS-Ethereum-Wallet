@@ -1,56 +1,134 @@
-<div class="centerer" id="screen-wallet">
-        <div class="centered">
-            <h1>Ethereum Wallet<span id="wallet-username" class="username right"></span></h1>
-            <hr />
-            <h3>Wallet Details:</h3>
-            <table>
-                <tr>
-                    <th>Address:</th>
-                    <td>
-                        <input type="text" readonly="readonly" class="readonly" id="wallet-address" ng-value="activeWallet.address" onclick ="this.select()" />
-                    </td>
-                </tr>
+<div class="section-wallet">
+    <h4 class="page-title">Ethereum Wallet</h4>
+    <div class="block-area">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="tile">
+                    <h2 class="tile-title">Wallet Information</h2>
+                    <table id="information-wallet">
+                        <tr>
+                            <td>
+                                <span class="lbl">Account Address</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" readonly="readonly" class="readonly" ng-value="WalletInformation.Address" onclick="this.select()" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="lbl">Wallet Balance</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" readonly="readonly" class="readonly" value="0.0" ng-value="WalletInformation.Balance" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="lbl">Transactions Count</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" readonly="readonly" class="readonly" value="0" ng-value="WalletInformation.TransactionCount" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button class="btn btn-lg btn-primary btn-block btn-signin full-width" ng-click="refresh()">Refresh</button>
+                            </td>
+                        </tr>
+                    </table>
+                    <hr>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="tile">
+                    <h2 class="tile-title">Send Ether</h2>
+                    <table id="information-wallet">
+                        <tr>
+                            <td>
+                                <span class="lbl">Target Account Address</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" placeholder="(target address)" ng-model="TransferInformation.TargetAddress" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="lbl">Amount</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" placeholder="(amount)" ng-value="TransferInformation.Amount" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="lbl">Transactions Cost</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" readonly="readonly" class="readonly" value="0" ng-value="CalculateTransacctionCost()" />
+                            </td>
+                        </tr>
 
-                <tr>
-                    <th>Balance:</th>
-                    <td>
-                        <input type="text" readonly="readonly" class="readonly" id="wallet-balance" value="0.0" ng-value="Balance" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>Nonce:</th>
-                    <td>
-                        <input type="text" readonly="readonly" class="readonly" id="wallet-transaction-count" value="0" ng-value="TransactionCount" />
-                    </td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td>
-                        <div id="wallet-submit-refresh" class="submit" ng-click="refresh()">Refresh</div>
-                    </td>
-                </tr>
-            </table>
-            <h3>Send Ether: {{gasPrice | number : 0}} Gas Price</h3>
-            <table>
-                <tr>
-                    <th>Target Address:</th>
-                    <td><input type="text" placeholder="(target address)" id="wallet-send-target-address" ng-model="TargetAddress"/></td>
-                </tr>
-                <tr>
-                    <th>Amount:</th>
-                    <td><input type="text" placeholder="(amount)" id="wallet-send-amount" ng-value="Amount" /></td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td>
-                        <div id="wallet-submit-send" class="submit" ng-click="SendEther()">Send Ether</div>
-                    </td>
-                </tr>
-            </table>
-            <h3>Session Activity</h3>
-            <div id="wallet-activity" class="activity"></div>
+                        <tr>
+                            <td>
+                                <button class="btn btn-lg btn-primary btn-block btn-signin full-width" ng-click="SendEther()">Send Ether</button>
+                            </td>
+                        </tr>
+                    </table>
+                    <hr>
 
-            <hr />
-          
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="tile">
+                    <h2 class="tile-title">Session Activity</h2>
+                    <ul id="wallet-activity" class="activity">
+                        <li ng-repeat="a in Activity">
+                            <span class="time">{{a.time}}</span> -> <span>{{a.msg}}</span>
+                        </li>
+                    </ul>
+                    <hr>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="tile">
+                    <h2 class="tile-title">Transaction History</h2>
+                    <table class="table table-bordered table-hover tile" style="margin-bottom:0">
+                        <thead>
+                            <tr>
+                                <th>DATE</th>
+                                <th>BLOCK NUMBER</th>
+                                <th>FROM</th>
+                                <th>TO</th>
+                                <th>VALUE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="transaction in WalletInformation.Transactions">
+                                <td>{{getDateTransacction(transaction.timeStamp)}}</td>
+                                <td>{{transaction.blockNumber}}</td>
+                                <td>{{transaction.from}}</td>
+                                <td>{{transaction.to}}</td>
+                                <td>{{getValueTransaction(transaction.value)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr>
+                </div>
+            </div>
         </div>
     </div>
+</div>
