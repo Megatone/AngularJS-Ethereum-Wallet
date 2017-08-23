@@ -9013,7 +9013,7 @@ function getAddress(address, icapFormat) {
     var result = null;
 
     if (typeof(address) !== 'string') {
-        throwError('invalid address', {input: address});
+        throwError('Invalid Address', {input: address});
     }
 
     if (address.match(/^(0x)?[0-9a-fA-F]{40}$/)) {
@@ -9025,7 +9025,7 @@ function getAddress(address, icapFormat) {
 
         // It is a checksummed address with a bad checksum
         if (address.match(/([A-F].*[a-f])|([a-f].*[A-F])/) && result !== address) {
-            throwError('invalid address checksum', { input: address, expected: result });
+            throwError('Invalid Address Checksum', { input: address, expected: result });
         }
 
     // Maybe ICAP? (we only support direct mode)
@@ -9033,7 +9033,7 @@ function getAddress(address, icapFormat) {
 
         // It is an ICAP address with a bad checksum
         if (address.substring(2, 4) !== ibanChecksum(address)) {
-            throwError('invalid address icap checksum', { input: address });
+            throwError('Invalid Address ICAP Checksum', { input: address });
         }
 
         result = (new BN(address.substring(4), 36)).toString(16);
@@ -9041,7 +9041,7 @@ function getAddress(address, icapFormat) {
         result = getChecksumAddress('0x' + result);
 
     } else {
-        throwError('invalid address', { input: address });
+        throwError('Invalid Address', { input: address });
     }
 
     if (icapFormat) {
@@ -9096,7 +9096,7 @@ function BigNumber(value) {
         value = new BN(convert.hexlify(value).substring(2), 16);
 
     } else {
-        throwError('invalid BigNumber value', { input: value });
+        throwError('Invalid BigNumber Value', { input: value });
     }
 
     defineProperty(this, '_bn', value);

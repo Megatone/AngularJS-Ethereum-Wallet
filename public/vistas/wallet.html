@@ -66,7 +66,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <input type="text" placeholder="(amount)" ng-value="TransferInformation.Amount" />
+                                <input type="text" placeholder="(amount)" ng-model="TransferInformation.Amount" />
                             </td>
                         </tr>
                         <tr>
@@ -97,14 +97,14 @@
                     <h2 class="tile-title">Session Activity</h2>
                     <ul id="wallet-activity" class="activity">
                         <li ng-repeat="a in Activity">
-                            <span class="time">{{a.time}}</span> -> <span>{{a.msg}}</span>
+                            <span class="time">{{a.time}}</span> -> <span class="{{a.color}}">{{a.msg}}</span>
                         </li>
                     </ul>
                     <hr>
                 </div>
             </div>
             <div class="col-md-9">
-                <div class="tile">
+                <div class="tile tile-table">
                     <h2 class="tile-title">Transaction History</h2>
                     <table class="table table-bordered table-hover tile" style="margin-bottom:0">
                         <thead>
@@ -118,7 +118,7 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="transaction in WalletInformation.Transactions">
-                                <td>{{getDateTransacction(transaction.timeStamp)}}</td>
+                                <td>{{getDateTransacction(transaction.timeStamp) | date:'dd-MM-yyyy hh:mm:ss'}}</td>
                                 <td>{{transaction.blockNumber}}</td>
                                 <td>{{transaction.from}}</td>
                                 <td>{{transaction.to}}</td>

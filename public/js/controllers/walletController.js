@@ -1,4 +1,4 @@
-app.controller("walletController", function ($scope, $rootScope, $http, Notify) {
+app.controller("walletController", function ($scope, $rootScope, $http, Notify , $sce , $window) {
 
     $scope.WalletInformation = {
         Address: $rootScope.activeWallet.address,
@@ -10,18 +10,16 @@ app.controller("walletController", function ($scope, $rootScope, $http, Notify) 
     $scope.TransferInformation = {
         TargetAddress: '',
         Amount: 0,
-        GasPrice: {         
-            fastest: 20.0,
-            safeLowWait: 9.5,
-            average: 4.0,
-            avgWaitC: 3.5,           
-            fastWaitC: 1.6,
-            avgWait: 1.1,            
-            fastWait: 0.7,
-            safeLow: 0.01           
-        },
+        GasPrice: 0,       
         GasLimit: 21000
     };
+
+    var Colors = {
+        yellow : "FCyellow",
+        red : "FCred",
+        green : "FCgreen"
+    };
+
 
 
     $scope.Activity = [];
@@ -29,12 +27,12 @@ app.controller("walletController", function ($scope, $rootScope, $http, Notify) 
 
     refresh();
 
-    function refresh() {
+    function refresh() {      
         getGasPrice();
-        addActivity(' Obtaining account balance');
+        addActivity(' Obtaining account balance' , Colors.yellow);
         $rootScope.activeWallet.getBalance('pending').then(function (balance) {
             $scope.WalletInformation.Balance = ethers.utils.formatEther(balance, { commify: true });
-            addActivity(' This account has ' + $scope.WalletInformation.Balance + ' ETH');
+            addActivity(' This account has ' + $scope.WalletInformation.Balance + ' ETH' , Colors.green);
             $scope.$apply();
         }, function (error) {
             showError(error);
@@ -47,24 +45,23 @@ app.controller("walletController", function ($scope, $rootScope, $http, Notify) 
     };
 
     function showError(error) {
-        alert('Error \u2014 ' + error.message);
+        addActivity("Error : " + error.message , Colors.red);
     };
 
-
-
-    function addActivity(message) {
+  
+    function addActivity(message ,color) {
         var d = new Date();
-        $scope.Activity.push({ time: d.toLocaleTimeString(), msg: message });
+        $scope.Activity.push({ time: d.toLocaleTimeString(), msg: message ,color : color });
     };
 
     $scope.SendEther = function () {
         if (check()) {
-            var amountWei = ethers.utils.parseEther($scope.TransferInformation.Amount);
+           var amountWei = ethers.utils.parseEther($scope.TransferInformation.Amount);
             $rootScope.activeWallet.send($scope.TransferInformation.TargetAddress, amountWei, {
-                gasPrice: $scope.TransferInformation.GasPrice.average,
+                gasPrice: $scope.TransferInformation.GasPrice,
                 gasLimit: $scope.TransferInformation.GasLimit,
             }).then(function (txid) {
-                addActivity('  Transaction sent : ' + txid);
+                addActivity('  Transaction sent : ' + txid , Colors.green);
                 $scope.TransferInformation.TargetAddress = '';
                 $scope.TransferInformation.Amount = 0;
                 refresh();
@@ -77,7 +74,9 @@ app.controller("walletController", function ($scope, $rootScope, $http, Notify) 
     function check() {
         try {
             ethers.utils.getAddress($scope.TransferInformation.TargetAddress);
-            ethers.utils.parseEther($scope.TransferInformation.Amount);
+            //ethers.utils.parseEther($scope.TransferInformation.Amount);
+        
+            if(parseFloat($scope.TransferInformation.Amount) +  parseFloat($scope.CalculateTransacctionCost()) > parseFloat($scope.WalletInformation.Balance) ) throw "error"
         } catch (error) {
             var incidence = { type: 'danger', message: error.message };
             Notify.notify(incidence);
@@ -85,52 +84,31 @@ app.controller("walletController", function ($scope, $rootScope, $http, Notify) 
         }
         return true;
     };
-    
 
-  function getGasPrice() {
-        addActivity(' Obtaining gas price');
+
+    function getGasPrice() {
+        addActivity(' Obtaining gas price.....' , Colors.yellow);
         $http({
             method: 'GET',
             url: 'https://api.etherscan.io/api?module=proxy&action=eth_gasPrice'
         }).then(function successCallback(response) {
             $scope.TransferInformation.GasPrice = response.data.result;
-            addActivity(' The gas price is currently ' + ($scope.TransferInformation.GasPrice * 1));
+            addActivity(' The gas price is currently ' + ($scope.TransferInformation.GasPrice * 1) , Colors.green);
         }, function errorCallback(response) {
 
         });
-     /*
-    function getGasPrice() {
-        addActivity(' Obtaining gas price');
-        $http({
-            method: 'GET',
-            url: 'http://ethgasstation.info/json/ethgasAPI.json',
-            contentType: "application/json"
-        }).then(function successCallback(response) {
-            $scope.TransferInformation.GasPrice =   {         
-                fastest: response.data.fastest,
-                safeLowWait:  response.data.safeLowWait,
-                average: response.data.average,
-                avgWaitC:  response.data.avgWaitC,           
-                fastWaitC:  response.data.fastWaitC,
-                avgWait:  response.data.avgWait,            
-                fastWait: response.data.fastWait,
-                safeLow:  response.data.safeLow           
-            };
-           // addActivity(' The gas price is currently ' + ($scope.TransferInformation.GasPrice * 1));
-        }, function errorCallback(response) {
-            console.log(response);
-        });
-    } }*/
+    }
+  
 
     function getTransactionsHistory() {
-        addActivity(' Obtaining transaction history ... ');
+        addActivity(' Obtaining transaction history ..... ' , Colors.yellow);
         $http({
             method: 'GET',
             url: 'http://api.etherscan.io/api?module=account&action=txlist&address=' + $scope.WalletInformation.Address + '&startblock=0&endblock=99999999&sort=desc'
         }).then(function successCallback(response) {
             $scope.WalletInformation.Transactions = response.data.result;
             $scope.WalletInformation.TransactionCount = $scope.WalletInformation.Transactions.length;
-            addActivity(' This account has ' + $scope.WalletInformation.TransactionCount + ' transsactions registered');
+            addActivity(' This account has ' + $scope.WalletInformation.TransactionCount + ' transsactions registered', Colors.green);
         }, function errorCallback(response) {
 
         });
@@ -138,7 +116,7 @@ app.controller("walletController", function ($scope, $rootScope, $http, Notify) 
 
     $scope.getDateTransacction = function (timeStamp) {
         var d = new Date(timeStamp * 1000);
-        return d.toISOString();
+        return d;
     };
 
     $scope.getValueTransaction = function (value) {
@@ -146,8 +124,13 @@ app.controller("walletController", function ($scope, $rootScope, $http, Notify) 
     };
 
     $scope.CalculateTransacctionCost = function () {
-        return ethers.utils.formatEther($scope.TransferInformation.GasPrice.average * $scope.TransferInformation.GasLimit);
+        return ethers.utils.formatEther($scope.TransferInformation.GasPrice * $scope.TransferInformation.GasLimit);
     };
+    //Precio del eth -> eur , usd 
+    //https://ethereumprice.org/api/pairs/?p=eur
 
+    //historico precios desde 2015 hasta hoy
+    //https://etherchain.org/api/statistics/price
 
+   
 });
