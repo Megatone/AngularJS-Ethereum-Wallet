@@ -1,6 +1,6 @@
 app.controller("priceController", function ($scope, $rootScope, $http) {
 
-
+    $scope.Loading = true;
     getActualPrice();
     $scope.Date = new Date();
     ($rootScope.PriceHistory == undefined) ? getPriceHistory() : drawChart();
@@ -21,7 +21,6 @@ app.controller("priceController", function ($scope, $rootScope, $http) {
                 USDPrice: parseFloat(response.data.result.ethusd),
                 TimeStamp: new Date(response.data.result.ethbtc_timestamp * 1000)
             };
-            console.log($scope.EthActualPrice);
         });
     };
 
@@ -300,5 +299,11 @@ app.controller("priceController", function ($scope, $rootScope, $http) {
                 turboThreshold: 0
             }]
         });
+        $scope.Loading = false;
+        try {
+            $scope.$apply();
+        } catch (err) {
+
+        }
     };
 });

@@ -450,3 +450,67 @@ body > section#main {
 .pad {
     padding:1em 0 !important;
 }
+
+
+/* Animation */
+@-webkit-keyframes loading {
+    to { -webkit-transform: rotate(360deg); }
+  }
+  @-moz-keyframes loading {
+      to { -moz-transform: rotate(360deg); }
+  }
+  @-ms-keyframes loading {
+      to { -ms-transform: rotate(360deg); }
+  }
+  @keyframes loading {
+      to { transform: rotate(360deg); }
+  }
+  
+  /* Loader (*/
+  #loading {
+  
+      width: 100px;
+      height: 100px;
+      border-radius: 50% !important;
+      background: transparent;
+      
+      border-top: 4px solid #fff;
+      border-right: 4px solid #fff;
+      border-bottom: 4px solid #777;
+      border-left: 4px solid #777;
+      
+      -webkit-animation: loading 1.2s infinite linear;
+      -moz-animation: loading 1.2s infinite linear;
+      -ms-animation: loading 1.2s infinite linear;
+      animation: loading 1.2s infinite linear;
+      
+  }
+
+  div#loading {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+    margin: -100px 0 0 -51px;
+}
+@media (max-width: 480px) {
+    div#loading {
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        margin: -100px 0 0 -51px;
+    }
+}
+
+#section-price{
+    background: rgba(0, 0, 0, 0.34);
+}
+#section-home a{
+    color:yellow;
+}
+
+.home-p{
+ 
+    font-size: 2em;
+}
+  
+
