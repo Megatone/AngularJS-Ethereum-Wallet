@@ -19,6 +19,6 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Screenshots
 
-![](https://raw.githubusercontent.com/Megatone/AngularJS-Ethereum-Wallet/captures/key.png)
-![](https://raw.githubusercontent.com/Megatone/AngularJS-Ethereum-Wallet/captures/wallet.png)
-![](https://raw.githubusercontent.com/Megatone/AngularJS-Ethereum-Wallet/captures/price.png)
+![](https://github.com/Megatone/AngularJS-Ethereum-Wallet/blob/master/captures/key.png?raw=true)
+![](https://github.com/Megatone/AngularJS-Ethereum-Wallet/blob/master/captures/wallet.png?raw=true)
+![](https://github.com/Megatone/AngularJS-Ethereum-Wallet/blob/master/captures/price.png?raw=true)
