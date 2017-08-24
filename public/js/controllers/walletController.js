@@ -127,7 +127,7 @@ app.controller("walletController", function ($scope, $rootScope, $http, Notify ,
         return ethers.utils.formatEther($scope.TransferInformation.GasPrice * $scope.TransferInformation.GasLimit);
     };
     //Precio del eth -> eur , usd 
-    //https://ethereumprice.org/api/pairs/?p=eur
+    //
 
     //historico precios desde 2015 hasta hoy
     //https://etherchain.org/api/statistics/price

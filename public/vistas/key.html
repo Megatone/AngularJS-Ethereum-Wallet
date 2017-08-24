@@ -1,8 +1,10 @@
-<div class="panel login-panel ng-scope">
+<div class="login-panel ng-scope">
     <div class="card card-container">
         <img id="profile-img" class="profile-img-card" src="/img/eth-logo.png">       
         <input type="text" placeholder="(Ethereum Wallet Private Key)" id="select-privatekey" ng-model="PrivateKey" my-enter="OpenWallet()"/>
         <button class="btn btn-lg btn-primary btn-block btn-signin full-width" ng-click="OpenWallet()">Unlock Ethereum Wallet</button>
+        <hr>
+        <input type="checkbox" ng-model="Remember" ng-change="SetRememberValue()"/><span class="lbl-check">Remember Private Key</span>
     </div>
 </div>
 

@@ -1,0 +1,31 @@
+<div id="section-price">
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    <div class="block-area">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="tile">
+                    <h2 class="tile-title">USD PRICE</h2>
+                    <div class="pad">
+                        <center><span class="big-data">{{EthActualPrice.USDPrice | number : 2}} $</span></center>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="tile">
+                    <h2 class="tile-title">UPDATE DATE</h2>
+                    <div class="pad">
+                        <center><span class="big-data">{{EthActualPrice.TimeStamp | date : 'dd-MM-yyyy hh:mm:ss'}}</span></center>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="tile">
+                    <h2 class="tile-title">BTC PRICE</h2>
+                    <div class="pad">
+                        <center> <span class="big-data">{{EthActualPrice.BTCPrice | number :10}} BTC</span></center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
