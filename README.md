@@ -15,3 +15,10 @@ These instructions will get you a copy of the project up and running on your loc
 3. `npm i --save`
 4. `npm start`
 5. Open browser http://localhost:8000/.
+
+
+## Screenshots
+
+![](https://raw.githubusercontent.com/Megatone/AngularJS-Ethereum-Wallet/captures/key.png)
+![](https://raw.githubusercontent.com/Megatone/AngularJS-Ethereum-Wallet/captures/wallet.png)
+![](https://raw.githubusercontent.com/Megatone/AngularJS-Ethereum-Wallet/captures/price.png)
